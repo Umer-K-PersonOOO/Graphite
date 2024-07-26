@@ -100,6 +100,7 @@ impl<'a> MessageHandler<NodeGraphMessage, NodeGraphHandlerData<'a>> for NodeGrap
 					});
 				}
 				responses.add(ArtboardToolMessage::UpdateSelectedArtboard);
+				responses.add(DocumentMessage::DocumentStructureChanged);
 				responses.add(NodeGraphMessage::RunDocumentGraph);
 			}
 			NodeGraphMessage::ConnectNodesByWire {
@@ -337,6 +338,7 @@ impl<'a> MessageHandler<NodeGraphMessage, NodeGraphHandlerData<'a>> for NodeGrap
 					}
 
 					self.update_selected(document_network, selected_nodes, responses);
+					responses.add(NodeGraphMessage::SendGraph);
 				}
 			}
 			NodeGraphMessage::EnforceLayerHasNoMultiParams { node_id } => {
